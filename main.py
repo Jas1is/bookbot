@@ -3,14 +3,14 @@ def main():
     book_path = "books/frankenstein.txt"
     text = get_book_text(book_path)
     num_words = get_num_words(text)
-    print(f"{num_words} words found in the document")
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{num_words} words found in the document\n")
     char_counts = get_char_count(text)
     list_of_dicts = [{'char': key, 'count': value} for key, value in char_counts.items()]
-    sorted_dicts = list_of_dicts.sort(reverse=True, key=sort_on)
-    character_report(sorted_dicts)
+    list_of_dicts.sort(reverse=True, key=sort_on)
+    character_report(list_of_dicts)
+    print("--- End report ---")
     
-
-
 
 def get_num_words(text):
     words = text.split()
@@ -31,12 +31,12 @@ def get_char_count(text):
     return char_counts
 
 def sort_on(dict):
-    return dict["char"]
+    return dict["count"]
 
 def character_report(char_counts):
-    for char in char_counts:
-        if char.isalpha():
-            print(char)
+    for item in char_counts:
+        if item["char"].isalpha():
+            print(f"The \'{item['char']}\' character was found {item['count']} times")
 
 
 main()
